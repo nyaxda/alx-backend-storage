@@ -2,7 +2,7 @@
 DROP VIEW IF EXISTS `CountryRank`;
 
 CREATE VIEW CountryRank AS
-SELECT origin, COUNT(*) AS nb_fans
+SELECT origin, SUM(fans) AS nb_fans
 FROM metal_bands
 GROUP BY origin
 ORDER BY nb_fans DESC;
