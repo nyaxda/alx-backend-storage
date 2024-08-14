@@ -9,10 +9,10 @@ from typing import Union
 class Cache:
     """Class for implementing a Cache"""
 
-    def __init__(self):
+    def __init__(self) -> None:
         """Constructor"""
         self._redis: redis.Redis = redis.Redis()
-        self._redis.flushdb()
+        self._redis.flushdb(True)
 
     def store(self, data: Union[str, bytes, int, float]) -> str:
         """Hashing method to store data in Redis"""
