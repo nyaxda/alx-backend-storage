@@ -13,8 +13,10 @@ def print_nginx_logs(dump):
     print(f"\tmethod PUT: {dump.count_documents({'method': 'PUT'})}")
     print(f"\tmethod PATCH: {dump.count_documents({'method': 'PATCH'})}")
     print(f"\tmethod DELETE: {dump.count_documents({'method': 'DELETE'})}")
-    print(f"{dump.count_documents({
-        'method': 'GET', 'path': '/status'})} status check")
+    status_check_count = dump.count_documents(
+        {'method': 'GET', 'path': '/status'}
+    )
+    print(f"{status_check_count} status check")
 
 
 def main():
