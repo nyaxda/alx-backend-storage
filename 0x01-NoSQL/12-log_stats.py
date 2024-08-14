@@ -4,26 +4,28 @@
 from pymongo import MongoClient
 
 
-def print_nginx_logs(dump):
-    """function that returns the list of school having a specific topic"""
-    print(f"{dump.count_documents({})} logs")
-    print("Methods:")
-    print(f"\tmethod GET: {dump.count_documents({"method": "GET"})}")
-    print(f"\tmethod POST: {dump.count_documents({"method": "POST"})}")
-    print(f"\tmethod PUT: {dump.count_documents({"method": "PUT"})}")
-    print(f"\tmethod PATCH: {dump.count_documents({"method": "PATCH"})}")
-    print(f"\tmethod DELETE: {dump.count_documents({"method": "DELETE"})}")
-    status_check_count = dump.count_documents(
-        {"method": "GET", "path": "/status"}
-    )
-    print(f"{status_check_count} status check")
-
-
-def main():
-    """main function"""
+def request_logs():
+    """ log_stats.
+    """
     client = MongoClient('mongodb://127.0.0.1:27017')
-    print_nginx_logs(client.logs.nginx)
+    logs_collection = client.logs.nginx
+    total = logs_collection.count_documents({})
+    get = logs_collection.count_documents({"method": "GET"})
+    post = logs_collection.count_documents({"method": "POST"})
+    put = logs_collection.count_documents({"method": "PUT"})
+    patch = logs_collection.count_documents({"method": "PATCH"})
+    delete = logs_collection.count_documents({"method": "DELETE"})
+    path = logs_collection.count_documents(
+        {"method": "GET", "path": "/status"})
+    print(f"{total} logs")
+    print("Methods:")
+    print(f"\tmethod GET: {get}")
+    print(f"\tmethod POST: {post}")
+    print(f"\tmethod PUT: {put}")
+    print(f"\tmethod PATCH: {patch}")
+    print(f"\tmethod DELETE: {delete}")
+    print(f"{path} status check")
 
 
-if __name__ == '__main__':
-    main()
+if __name__ == "__main__":
+    request_logs()
