@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""module for mongodb"""
-
+""" 12. Log stats
+"""
 from pymongo import MongoClient
 
 
-def request_logs():
+def log_stats():
     """ log_stats.
     """
     client = MongoClient('mongodb://127.0.0.1:27017')
@@ -28,4 +28,4 @@ def request_logs():
 
 
 if __name__ == "__main__":
-    request_logs()
+    log_stats()
